@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import './question.dart';
+import './answer.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,13 +28,13 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  void _goBack() {
-    if (_index > 0) {
-      setState(() {
-        _index = _index - 1;
-      });
-    }
-  }
+  // void _goBack() {
+  //   if (_index > 0) {
+  //     setState(() {
+  //       _index = _index - 1;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +46,7 @@ class _MyAppState extends State<MyApp> {
       body: Column(
         children: [
           Question('${_index + 1}. ' + questions[_index]),
-          OutlinedButton(onPressed: _btnPressed, child: Text("Next")),
-          OutlinedButton(onPressed: _goBack, child: Text("back")),
+          Answer(_btnPressed)
         ],
       ),
     ));
