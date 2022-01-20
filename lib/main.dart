@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
         {"text": 'Red', "score": 8},
         {"text": 'Blue', "score": 1},
         {"text": 'Green', "score": 3},
-        {"text": "Yellow", "score": 5}
+        {"text": "Yellow", "score": 5},
       ]
     },
     {
@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
         {"text": 'Rabbit', "score": 1},
         {"text": 'Snake', "score": 9},
         {"text": 'Elephant', "score": 2},
-        {"text": "Lion", "score": 5}
+        {"text": "Lion", "score": 5},
       ]
     },
     {
@@ -41,10 +41,17 @@ class _MyAppState extends State<MyApp> {
         {"text": 'Max', "score": 1},
         {"text": 'Max', "score": 1},
         {"text": 'Max', "score": 1},
-        {"text": 'Max', "score": 1}
+        {"text": 'Max', "score": 1},
       ]
     }
   ];
+
+  void _resetQuiz() {
+    setState(() {
+      _index = 0;
+      _totalScore = 0;
+    });
+  }
 
   void _btnPressed(int score) {
     _totalScore += score;
@@ -59,15 +66,18 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-            appBar: AppBar(
-              title: const Text('Hello world'),
-            ),
-            body: _index < _questions.length
-                ? Quiz(
-                    btnPressed: _btnPressed,
-                    questions: _questions,
-                    index: _index)
-                : Result(_totalScore)));
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Hello world'),
+        ),
+        body: _index < _questions.length
+            ? Quiz(
+                btnPressed: _btnPressed,
+                questions: _questions,
+                index: _index,
+              )
+            : Result(_totalScore, _resetQuiz),
+      ),
+    );
   }
 }
